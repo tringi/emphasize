@@ -10,7 +10,7 @@ Nicer access to various PE .rsrc (resources) data. Functions usually provide LAN
 ## Emphasize
 Utilities written exclusively for abandoned Emphasize project but found generally useful.
 
-## Emphasize
+## Shadow
 A few Win32 controls that don't store data, everything is queried by callbacks.
 
 ## License

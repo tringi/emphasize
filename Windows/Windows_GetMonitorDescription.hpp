@@ -96,7 +96,7 @@ namespace Windows {
     bool GetMonitorDescription (HMONITOR handle, Monitor * monitor);
     bool GetMonitorDescription (unsigned int i, Monitor * monitor);
     
-/ state flags
+    /// state flags
 
     // #define DISPLAY_DEVICE_ATTACHED_TO_DESKTOP   0x00000001
     // #define DISPLAY_DEVICE_MULTI_DRIVER          0x00000002

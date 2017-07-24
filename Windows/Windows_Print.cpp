@@ -1808,7 +1808,9 @@ namespace {
                 language = LOCALE_USER_DEFAULT;
                 break;
             default:
-                flags = LOCALE_NOUSEROVERRIDE;
+                if (format == nullptr) {
+                    flags = LOCALE_NOUSEROVERRIDE;
+                }
                 language = va_arg (this->va, unsigned int);
                 break;
         };

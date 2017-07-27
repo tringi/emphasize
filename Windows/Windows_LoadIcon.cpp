@@ -65,12 +65,12 @@ HICON Windows::LoadLargeIcon (HINSTANCE hInstance, PCWSTR name) {
 namespace {
     SIZE GetShellOrJumboIconSize (UINT type) {
 #if WINVER < 0x0600
-        HRESULT WINAPI (* SHGetImageList) (int, const GUID &, void**) = NULL; 
+        HRESULT (WINAPI * SHGetImageList) (int, const GUID &, void**) = NULL;
 
-        if (Windows::Version < Windows::Version::WindowsVista) {
-            Windows::Symbol (L"SHELL32", SHGetImageList, 727);
-        } else {
+        if (IsWindowsVistaOrGreater ()) {
             Windows::Symbol (L"SHELL32", SHGetImageList, "SHGetImageList");
+        } else {
+            Windows::Symbol (L"SHELL32", SHGetImageList, 727);
         };
 
         if (SHGetImageList) {

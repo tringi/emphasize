@@ -926,16 +926,13 @@ namespace {
                 wchar_t fmt [6];
                 if (auto c = this->ErrorCodeHexadecimal (string_id, true)) {
                     _snwprintf (fmt, sizeof fmt / sizeof fmt [0], L"0x%%%c", c);
-
-                    if (!this->String (L"0x", 2u))
-                        return false;
                 } else {
                     fmt [0] = L'%';
                     fmt [1] = L'd';
                     fmt [2] = L'\0';
                 };
 
-                wchar_t buffer [6];
+                wchar_t buffer [20];
                 auto length = _snwprintf (buffer, sizeof buffer / sizeof buffer [0], fmt, string_id);
                 if (!this->String (buffer, length))
                     return false;

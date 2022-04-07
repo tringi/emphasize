@@ -945,6 +945,11 @@ namespace {
             
             if (this->memory.Ensure (sizeof (wchar_t) * length)) {
                 auto output = reinterpret_cast <wchar_t *> (this->memory.Data ());
+
+                if ((string_id & 0x87FF0000) == MAKE_HRESULT (SEVERITY_ERROR, FACILITY_WIN32)) {
+                    string_id = HRESULT_CODE (string_id);
+                }
+
                 if (auto n = Resources::ErrorMessage (output, length, (unsigned int) string_id, language)) {
                     
                     // rtrim

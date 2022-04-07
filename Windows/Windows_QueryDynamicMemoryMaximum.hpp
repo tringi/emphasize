@@ -3,6 +3,7 @@
 
 #include <windows.h>
 #include <cstddef>
+#include <cstdint>
 
 namespace Windows {
 
@@ -22,7 +23,7 @@ namespace Windows {
     //        - ERROR_NO_DATA - incompatible protocol or not a Virtual Machine, but driver is running
     //        - ERROR_ACCESS_DENIED - returns Performance Counters API inside Nano Server container
     //
-    DWORD QueryDynamicMemoryMaximum (std::size_t * result);
+    DWORD QueryDynamicMemoryMaximum (std::uint64_t * result);
 }
 
 #endif

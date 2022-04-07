@@ -6,7 +6,7 @@
 //
 static const GUID HvDmvcsGuid = { 0x66f19dff, 0xa4dd, 0x4802, { 0x8f, 0xbb, 0x29, 0xe6, 0xa5, 0x4a, 0xf9, 0xda } };
 
-DWORD Windows::QueryDynamicMemoryMaximum (std::size_t * value) {
+DWORD Windows::QueryDynamicMemoryMaximum (std::uint64_t * value) {
     DWORD error = ERROR_SUCCESS;
     HANDLE query = NULL;
 
@@ -49,7 +49,7 @@ DWORD Windows::QueryDynamicMemoryMaximum (std::size_t * value) {
                             case 1:
                                 if (n >= (sizeof data - sizeof (DWORD))) { // if published as single DWORD instead of ULONGLONG
                                     if (value) {
-                                        *value = data.value * 1024 * 1024;
+                                        *value = data.value * 1048576uLL;
                                     }
                                 }
                         }

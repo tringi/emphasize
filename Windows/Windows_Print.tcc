@@ -13,7 +13,8 @@
 
 #define DEFINE_WINDOWS_SPRINT_N_FORWARDERS(outtype,ftype) \
     template <unsigned long long N>                                             \
-    Windows::PR <outtype> Windows::SPrint (outtype (&buffer) [N], ftype format, ...) { \
+    Windows::PR <outtype> Windows::SPrint (_Out_writes_z_(N) outtype (&buffer) [N],\
+                                           ftype format, ...) {                 \
         va_list args;                                                           \
         va_start (args, format);                                                \
         auto result = Windows::SPrintVA (buffer, sizeof buffer, format, args);  \

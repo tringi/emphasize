@@ -276,49 +276,49 @@ namespace Windows {
     PR <void> WSAPrintCPVA (unsigned int, unsigned int cp, unsigned int format, std::va_list);
     
     // UTF-16 LE or whatever CP is defined
-    PR <wchar_t> SPrint   (wchar_t *, std::size_t, const wchar_t * format, ...);
-    PR <wchar_t> SPrintVA (wchar_t *, std::size_t, const wchar_t * format, std::va_list);
+    PR <wchar_t> SPrint   (_Out_writes_z_ (n) wchar_t *, std::size_t n, const wchar_t * format, ...);
+    PR <wchar_t> SPrintVA (_Out_writes_z_ (n) wchar_t *, std::size_t n, const wchar_t * format, std::va_list);
     PR <char> SPrintCP   (void *, std::size_t, unsigned int cp, const wchar_t * format, ...);
     PR <char> SPrintCPVA (void *, std::size_t, unsigned int cp, const wchar_t * format, std::va_list);
     
-    PR <wchar_t> SPrint   (wchar_t *, std::size_t, unsigned int format, ...);
-    PR <wchar_t> SPrintVA (wchar_t *, std::size_t, unsigned int format, std::va_list);
+    PR <wchar_t> SPrint   (_Out_writes_z_ (n) wchar_t *, std::size_t n, unsigned int format, ...);
+    PR <wchar_t> SPrintVA (_Out_writes_z_ (n) wchar_t *, std::size_t n, unsigned int format, std::va_list);
     PR <char> SPrintCP   (void *, std::size_t, unsigned int cp, unsigned int format, ...);
     PR <char> SPrintCPVA (void *, std::size_t, unsigned int cp, unsigned int format, std::va_list);
 
-    template <unsigned long long N> PR <wchar_t> SPrint (wchar_t (&) [N], const wchar_t * format, ...);
-    template <unsigned long long N> PR <wchar_t> SPrintVA (wchar_t (&) [N], const wchar_t * format, std::va_list);
-    template <unsigned long long N> PR <wchar_t> SPrintVA (wchar_t (&) [N], unsigned int format, std::va_list);
+    template <unsigned long long N> PR <wchar_t> SPrint (_Out_writes_z_ (N) wchar_t (&) [N], const wchar_t * format, ...);
+    template <unsigned long long N> PR <wchar_t> SPrintVA (_Out_writes_z_ (N) wchar_t (&) [N], const wchar_t * format, std::va_list);
+    template <unsigned long long N> PR <wchar_t> SPrintVA (_Out_writes_z_ (N) wchar_t (&) [N], unsigned int format, std::va_list);
 
     // CP_ACP if not overriden by SetDefaultSPrintCodePage or SetDefaultPrintCodePage
-    PR <char> SPrint   (char *, std::size_t, const wchar_t * format, ...);
-    PR <char> SPrint   (char *, std::size_t, unsigned int format, ...);
-    PR <char> SPrintVA (char *, std::size_t, const wchar_t * format, std::va_list);
-    PR <char> SPrintVA (char *, std::size_t, unsigned int format, std::va_list);
+    PR <char> SPrint   (_Out_writes_z_ (n) char *, std::size_t n, const wchar_t * format, ...);
+    PR <char> SPrint   (_Out_writes_z_ (n) char *, std::size_t n, unsigned int format, ...);
+    PR <char> SPrintVA (_Out_writes_z_ (n) char *, std::size_t n, const wchar_t * format, std::va_list);
+    PR <char> SPrintVA (_Out_writes_z_ (n) char *, std::size_t n, unsigned int format, std::va_list);
 
-    template <unsigned long long N> PR <char> SPrint   (char (&) [N], const wchar_t * format, ...);
-    template <unsigned long long N> PR <char> SPrintVA (char (&) [N], const wchar_t * format, std::va_list);
-    template <unsigned long long N> PR <char> SPrintVA (char (&) [N], unsigned int format, std::va_list);
+    template <unsigned long long N> PR <char> SPrint   (_Out_writes_z_ (N) char (&) [N], const wchar_t * format, ...);
+    template <unsigned long long N> PR <char> SPrintVA (_Out_writes_z_ (N) char (&) [N], const wchar_t * format, std::va_list);
+    template <unsigned long long N> PR <char> SPrintVA (_Out_writes_z_ (N) char (&) [N], unsigned int format, std::va_list);
     
     // UTF-16 LE
-    PR <char16_t> SPrint   (char16_t *, std::size_t, const wchar_t * format, ...);
-    PR <char16_t> SPrint   (char16_t *, std::size_t, unsigned int format, ...);
-    PR <char16_t> SPrintVA (char16_t *, std::size_t, const wchar_t * format, std::va_list);
-    PR <char16_t> SPrintVA (char16_t *, std::size_t, unsigned int format, std::va_list);
+    PR <char16_t> SPrint   (_Out_writes_z_ (n) char16_t *, std::size_t n, const wchar_t * format, ...);
+    PR <char16_t> SPrint   (_Out_writes_z_ (n) char16_t *, std::size_t n, unsigned int format, ...);
+    PR <char16_t> SPrintVA (_Out_writes_z_ (n) char16_t *, std::size_t n, const wchar_t * format, std::va_list);
+    PR <char16_t> SPrintVA (_Out_writes_z_ (n) char16_t *, std::size_t n, unsigned int format, std::va_list);
 
-    template <unsigned long long N> PR <char16_t> SPrint   (char16_t (&) [N], const wchar_t * format, ...);
-    template <unsigned long long N> PR <char16_t> SPrintVA (char16_t (&) [N], const wchar_t * format, std::va_list);
-    template <unsigned long long N> PR <char16_t> SPrintVA (char16_t (&) [N], unsigned int format, std::va_list);
+    template <unsigned long long N> PR <char16_t> SPrint   (_Out_writes_z_ (N) char16_t (&) [N], const wchar_t * format, ...);
+    template <unsigned long long N> PR <char16_t> SPrintVA (_Out_writes_z_ (N) char16_t (&) [N], const wchar_t * format, std::va_list);
+    template <unsigned long long N> PR <char16_t> SPrintVA (_Out_writes_z_ (N) char16_t (&) [N], unsigned int format, std::va_list);
 
     // UTF-32 LE
-    PR <char32_t> SPrint   (char32_t *, std::size_t, const wchar_t * format, ...);
-    PR <char32_t> SPrint   (char32_t *, std::size_t, unsigned int format, ...);
-    PR <char32_t> SPrintVA (char32_t *, std::size_t, const wchar_t * format, std::va_list);
-    PR <char32_t> SPrintVA (char32_t *, std::size_t, unsigned int format, std::va_list);
+    PR <char32_t> SPrint   (_Out_writes_z_ (n) char32_t *, std::size_t n, const wchar_t * format, ...);
+    PR <char32_t> SPrint   (_Out_writes_z_ (n) char32_t *, std::size_t n, unsigned int format, ...);
+    PR <char32_t> SPrintVA (_Out_writes_z_ (n) char32_t *, std::size_t n, const wchar_t * format, std::va_list);
+    PR <char32_t> SPrintVA (_Out_writes_z_ (n) char32_t *, std::size_t n, unsigned int format, std::va_list);
 
-    template <unsigned long long N> PR <char32_t> SPrint   (char32_t (&) [N], const wchar_t * format, ...);
-    template <unsigned long long N> PR <char32_t> SPrintVA (char32_t (&) [N], const wchar_t * format, std::va_list);
-    template <unsigned long long N> PR <char32_t> SPrintVA (char32_t (&) [N], unsigned int format, std::va_list);
+    template <unsigned long long N> PR <char32_t> SPrint   (_Out_writes_z_ (N) char32_t (&) [N], const wchar_t * format, ...);
+    template <unsigned long long N> PR <char32_t> SPrintVA (_Out_writes_z_ (N) char32_t (&) [N], const wchar_t * format, std::va_list);
+    template <unsigned long long N> PR <char32_t> SPrintVA (_Out_writes_z_ (N) char32_t (&) [N], unsigned int format, std::va_list);
 
     // TODO: adding custom encodings?
     // TODO: Print (console) redirection (HANDLE / function / virt class)

@@ -56,6 +56,7 @@ bool Windows::GetMonitorDescription (HMONITOR handle, Monitor * monitor) {
                 else
                     return true;
             };
+            ++i;
         };
     };
     
@@ -176,10 +177,9 @@ namespace {
                     if (monitor->size.cx < 10 * edid [21]) monitor->size.cx = 10 * edid [21];
                     if (monitor->size.cy < 10 * edid [22]) monitor->size.cy = 10 * edid [22];
 
-                    monitor->diagonal = std::sqrt (monitor->size.cx * monitor->size.cx
-                                                 + monitor->size.cy * monitor->size.cy)
-                                      / 2.54f
-                                      + 0.5f;
+                    monitor->diagonal = std::sqrtf (monitor->size.cx * monitor->size.cx
+                                                  + monitor->size.cy * monitor->size.cy)
+                                                  / 2.54f * 10.0f;
                     
                     monitor->native.resolution.cx = ((edid [54+4] >> 4) << 8) | edid [54+2];
                     monitor->native.resolution.cy = ((edid [54+7] >> 4) << 8) | edid [54+5];
@@ -194,14 +194,13 @@ namespace {
                     ExtractEdidText (edid, 0xFF, monitor->name.serial);
                     
                     if (monitor->size.cx || monitor->size.cy) {
-                        monitor->current.dpi = std::sqrt (monitor->current.resolution.cx * monitor->current.resolution.cx
-                                                        + monitor->current.resolution.cy * monitor->current.resolution.cy)
-                                             / std::sqrt (monitor->size.cx * monitor->size.cx
-                                                        + monitor->size.cy * monitor->size.cy)
-                                             * 2.54f * 10.0f
-                                             + 0.5f;
+                        monitor->current.dpi = std::sqrtf (monitor->current.resolution.cx * monitor->current.resolution.cx
+                                                         + monitor->current.resolution.cy * monitor->current.resolution.cy)
+                                             / std::sqrtf (monitor->size.cx * monitor->size.cx
+                                                         + monitor->size.cy * monitor->size.cy)
+                                             * 2.54f * 10.0f;
                     } else {
-                        monitor->current.dpi = 96;
+                        monitor->current.dpi = 96.0f;
                     };
                 };
                 
@@ -228,14 +227,13 @@ namespace {
             };
             
             if (monitor->size.cx || monitor->size.cy) {
-                monitor->native.dpi = std::sqrt (monitor->native.resolution.cx * monitor->native.resolution.cx
-                                               + monitor->native.resolution.cy * monitor->native.resolution.cy)
-                                    / std::sqrt (monitor->size.cx * monitor->size.cx
-                                               + monitor->size.cy * monitor->size.cy)
-                                    * 2.54f * 10.0f
-                                    + 0.5f;
+                monitor->native.dpi = std::sqrtf (monitor->native.resolution.cx * monitor->native.resolution.cx
+                                                + monitor->native.resolution.cy * monitor->native.resolution.cy)
+                                    / std::sqrtf (monitor->size.cx * monitor->size.cx
+                                                + monitor->size.cy * monitor->size.cy)
+                                    * 2.54f * 10.0f;
             } else {
-                monitor->native.dpi = 96;
+                monitor->native.dpi = 96.0f;
             };
         };
 
@@ -243,7 +241,7 @@ namespace {
         //  - GetDpiForMonitor
         
         HRESULT (WINAPI * pfnGetDpiForMonitor) (HMONITOR, DWORD, UINT *, UINT *);
-        if (Windows::Symbol (L"SHCORE.DLL", pfnGetDpiForMonitor, "GetDpiForMonitor")) {
+        if (Windows::Symbol (L"SHCORE", pfnGetDpiForMonitor, "GetDpiForMonitor")) {
             UINT y;
             if (pfnGetDpiForMonitor (handle, 0, &monitor->current.scaling, &y) != S_OK) {
                 Windows::GetDesktopDPI (&monitor->current.scaling, NULL);

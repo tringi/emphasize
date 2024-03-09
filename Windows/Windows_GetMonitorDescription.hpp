@@ -42,20 +42,20 @@ namespace Windows {
             unsigned int    serial;
         } product;
         
-        unsigned short  diagonal;   // monitor diagonal in tenths of inches
+        float           diagonal;   // monitor diagonal in inches
         SIZE            size;       // monitor size in millimetes, as reported
         
         struct {
             SIZE        resolution; // current monitor resolution
-            UINT        dpi;        // current monitor DPI (actual)
+            float       dpi;        // current monitor DPI (actual)
             RECT        workarea;   // current monitor work area
             RECT        rectangle;  // current monitor rectangle
             UINT        scaling;    // current horizontal scaling DPI
         } current;
         
         struct {
-            SIZE resolution;        // native monitor resolution
-            UINT dpi;               // native monitor DPI
+            SIZE  resolution;       // native monitor resolution
+            float dpi;              // native monitor DPI
         } native;
         
         union {
